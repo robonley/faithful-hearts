@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'faithful-hearts-shell-v1';
+const SHELL_CACHE = 'faithful-hearts-shell-v2';
 const CONTENT_CACHE = 'faithful-hearts-content-v1';
 const CORE_ASSETS = [
   './index.html',
@@ -8,10 +8,10 @@ const CORE_ASSETS = [
   './reader.js',
   './catalog.json',
   './manifest.webmanifest',
-  './icons/icon_192.png',
-  './icons/icon_512.png',
-  './icons/icon_maskable_512.png',
-  './icons/apple_touch_icon.png'
+  './icon_192.png',
+  './icon_512.png',
+  './icon_maskable_512.png',
+  './apple_touch_icon.png'
 ];
 
 self.addEventListener('install', event => {

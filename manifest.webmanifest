@@ -3,7 +3,7 @@
   "name": "Faithful Hearts Family Devotions",
   "short_name": "Faithful Hearts",
   "description": "Connected nightly family devotionals with Scripture, true stories, discussion, action, and prayer.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#fcfbf8",
@@ -11,19 +11,19 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "icons/icon_192.png",
+      "src": "icon_192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon_512.png",
+      "src": "icon_512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon_maskable_512.png",
+      "src": "icon_maskable_512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
