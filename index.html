@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#254b42">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Faithful Hearts">
+  <title>Faithful Hearts</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple_touch_icon.png">
+  <link rel="icon" href="icons/icon_192.png" type="image/png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="library_page">
+  <header class="library_hero">
+    <div class="library_hero_inner">
+      <img class="library_logo" src="icons/icon_192.png" alt="">
+      <p class="library_eyebrow">Nightly family devotions</p>
+      <h1>Faithful Hearts</h1>
+      <p class="library_lead">Scripture at the centre. True stories to remember. One faithful action for tomorrow.</p>
+      <div class="library_primary_actions">
+        <a id="continue_button" class="primary_button" href="volume_one.html#night1">Begin Volume One</a>
+        <button id="check_updates" class="secondary_button" type="button">Check for new content</button>
+      </div>
+      <p id="update_message" class="library_status" role="status" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <main class="library_main">
+    <section aria-labelledby="library_heading">
+      <div class="section_heading_row">
+        <div>
+          <p class="library_eyebrow">Your library</p>
+          <h2 id="library_heading">Volumes</h2>
+        </div>
+        <p id="last_updated" class="library_meta"></p>
+      </div>
+      <div id="volume_grid" class="volume_grid"></div>
+    </section>
+
+    <section class="library_panel" id="install_panel" aria-labelledby="install_heading">
+      <p class="library_eyebrow">Install on iPhone</p>
+      <h2 id="install_heading">Put it on your Home Screen</h2>
+      <ol>
+        <li>Open this site in Safari.</li>
+        <li>Tap the Share button.</li>
+        <li>Choose Add to Home Screen.</li>
+        <li>Leave Open as Web App enabled, then tap Add.</li>
+      </ol>
+      <p>After installation it opens in its own app window. The current volume remains readable offline after the first successful load.</p>
+    </section>
+
+    <section class="library_panel" aria-labelledby="updates_heading">
+      <p class="library_eyebrow">Growing collection</p>
+      <h2 id="updates_heading">New content without reinstalling</h2>
+      <p>Future volumes can be published to the same address. The installed app checks the catalogue whenever it opens online. New volumes then appear in this library, while previously opened material remains available offline.</p>
+    </section>
+  </main>
+
+  <footer class="library_footer">
+    <p>Faithful Hearts family devotional library</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

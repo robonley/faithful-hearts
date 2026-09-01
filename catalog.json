@@ -1,0 +1,35 @@
+{
+  "version": "2026.08.31.1",
+  "updated": "2026-08-31",
+  "appTitle": "Faithful Hearts",
+  "volumes": [
+    {
+      "id": "volume_one",
+      "number": 1,
+      "title": "The Listening Heart",
+      "weeks": "Weeks 1 to 6",
+      "nights": 42,
+      "href": "volume_one.html",
+      "status": "available",
+      "description": "Listening to God, obedience at home, prompt action, honourable speech, ordered authority, and family remembrance."
+    },
+    {
+      "id": "volume_two",
+      "number": 2,
+      "title": "The Loving Home",
+      "weeks": "Weeks 7 to 12",
+      "nights": 42,
+      "status": "planned",
+      "description": "Patience, service, generosity, forgiveness, repair, and self control."
+    },
+    {
+      "id": "volume_three",
+      "number": 3,
+      "title": "The Faithful Sibling",
+      "weeks": "Weeks 13 to 18",
+      "nights": 42,
+      "status": "planned",
+      "description": "Brotherhood and sisterhood, truthful loyalty, practical help, courage, presence, and protection."
+    }
+  ]
+}
