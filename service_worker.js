@@ -1,4 +1,4 @@
-const SHELL_CACHE = 'faithful-hearts-shell-v2';
+const SHELL_CACHE = 'faithful-hearts-shell-v3';
 const CONTENT_CACHE = 'faithful-hearts-content-v1';
 const CORE_ASSETS = [
   './index.html',

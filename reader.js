@@ -11,6 +11,10 @@
   const continueLink = document.getElementById('reader_continue');
   const resetButton = document.getElementById('reader_reset');
   const themeButton = document.getElementById('reader_theme_button');
+  const contentsButton = document.getElementById('reader_contents_button');
+  const contentsMenu = document.getElementById('reader_contents_menu');
+  const contentsCloseButton = document.getElementById('reader_contents_close');
+  const contentsList = document.getElementById('reader_contents_list');
 
   function readCompleted() {
     try { return new Set(JSON.parse(localStorage.getItem(completedKey) || '[]')); }
@@ -101,6 +105,30 @@
   } catch {
     nightData = [];
   }
+
+  const sourceContents = document.querySelector('#contents nav');
+  if (contentsList && sourceContents) {
+    contentsList.replaceChildren(...[...sourceContents.cloneNode(true).children]);
+  }
+
+  function setContentsMenu(open) {
+    if (!contentsMenu || !contentsButton) return;
+    contentsMenu.hidden = !open;
+    contentsButton.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('reader_menu_open', open);
+    if (open) contentsCloseButton?.focus();
+    else contentsButton.focus();
+  }
+
+  contentsButton?.addEventListener('click', () => setContentsMenu(contentsMenu?.hidden));
+  contentsCloseButton?.addEventListener('click', () => setContentsMenu(false));
+  contentsMenu?.addEventListener('click', event => {
+    if (event.target.closest('[data-reader-menu-close], a')) setContentsMenu(false);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && contentsMenu && !contentsMenu.hidden) setContentsMenu(false);
+  });
+
   const searchableNights = nightData.map(item => {
     const articleText = document.getElementById(item.id)?.innerText || '';
     return { ...item, searchText: `${item.title} ${item.account} ${articleText}`.toLowerCase() };
