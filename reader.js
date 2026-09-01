@@ -14,7 +14,10 @@
   const contentsButton = document.getElementById('reader_contents_button');
   const contentsMenu = document.getElementById('reader_contents_menu');
   const contentsCloseButton = document.getElementById('reader_contents_close');
+  const contentsSearch = document.getElementById('reader_contents_search');
+  const contentsSearchClear = document.getElementById('reader_contents_search_clear');
   const contentsList = document.getElementById('reader_contents_list');
+  const contentsEmpty = document.getElementById('reader_contents_empty');
 
   function readCompleted() {
     try { return new Set(JSON.parse(localStorage.getItem(completedKey) || '[]')); }
@@ -111,12 +114,76 @@
     contentsList.replaceChildren(...[...sourceContents.cloneNode(true).children]);
   }
 
+  const nightSearchData = new Map(nightData.map(item => {
+    return [item.id, `${item.title} ${item.account}`.toLowerCase()];
+  }));
+
+  function fuzzyMatch(query, text) {
+    const needle = query.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const haystack = text.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!needle) return true;
+    for (let start = haystack.indexOf(needle[0]); start !== -1; start = haystack.indexOf(needle[0], start + 1)) {
+      let position = start + 1;
+      let matches = true;
+      for (const character of needle.slice(1)) {
+        const nextPosition = haystack.indexOf(character, position);
+        if (nextPosition === -1 || nextPosition - position > 3) {
+          matches = false;
+          break;
+        }
+        position = nextPosition + 1;
+      }
+      if (matches) return true;
+    }
+    return false;
+  }
+
+  function filterContents(query) {
+    if (!contentsList) return;
+    const headings = [...contentsList.querySelectorAll(':scope > h3')];
+    const links = [...contentsList.querySelectorAll(':scope > a')];
+    const matchingSections = new Set();
+
+    let section;
+    [...contentsList.children].forEach(child => {
+      if (child.matches('h3')) {
+        section = child;
+        return;
+      }
+      if (!child.matches('a')) return;
+      const id = child.getAttribute('href')?.slice(1) || '';
+      const searchText = `${child.textContent} ${nightSearchData.get(id) || ''}`;
+      const matches = fuzzyMatch(query, searchText);
+      child.hidden = !matches;
+      if (matches && section) matchingSections.add(section);
+    });
+
+    headings.forEach(heading => {
+      const headingMatches = fuzzyMatch(query, heading.textContent || '');
+      heading.hidden = !headingMatches && !matchingSections.has(heading);
+    });
+    if (contentsEmpty) contentsEmpty.hidden = links.some(link => !link.hidden);
+  }
+
+  contentsSearch?.addEventListener('input', event => filterContents(event.target.value));
+  contentsSearch?.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      contentsSearch.value = '';
+      filterContents('');
+    }
+  });
+  contentsSearchClear?.addEventListener('click', () => {
+    if (contentsSearch) contentsSearch.value = '';
+    filterContents('');
+    contentsSearch?.focus();
+  });
+
   function setContentsMenu(open) {
     if (!contentsMenu || !contentsButton) return;
     contentsMenu.hidden = !open;
     contentsButton.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('reader_menu_open', open);
-    if (open) contentsCloseButton?.focus();
+    if (open) contentsSearch?.focus();
     else contentsButton.focus();
   }
 
